@@ -21,6 +21,7 @@
   "packageRules": [
     {
       "matchDepNames": ["xcodereleases"],
+      "displayName": "Xcode.app",
       "changelogUrl": "{{{changelogUrl}}}"
     }
   ]
