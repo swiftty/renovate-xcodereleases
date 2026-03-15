@@ -11,8 +11,8 @@
   "customManagers": [
     {
       "customType": "regex",
-      "managerFilePatterns": ["\\.github/.*\\.ya?ml"],
-      "matchStrings": ["/Applications/Xcode_(?<currentValue>[^/]+?)\\.app"],
+      "fileMatch": ["\\.github/.*\\.ya?ml"],
+      "matchStrings": ["Xcode_(?<currentValue>[^/]+?)\\.app"],
       "datasourceTemplate": "custom.xcode",
       "versioningTemplate": "loose",
       "depNameTemplate": "xcodereleases"
