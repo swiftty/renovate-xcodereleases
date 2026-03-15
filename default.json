@@ -15,14 +15,7 @@
       "matchStrings": ["Xcode_(?<currentValue>[^/]+?)\\.app"],
       "datasourceTemplate": "custom.xcode",
       "versioningTemplate": "loose",
-      "depNameTemplate": "xcodereleases"
-    }
-  ],
-  "packageRules": [
-    {
-      "matchDepNames": ["xcodereleases"],
-      "displayName": "Xcode.app",
-      "changelogUrl": "{{{changelogUrl}}}"
+      "depNameTemplate": "xcode/app"
     }
   ]
 }
