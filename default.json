@@ -1,13 +1,4 @@
 {
-  "customManagers": [
-    {
-      "customType": "regex",
-      "managerFilePatterns": ["\\.github/.*\\.ya?ml"],
-      "matchStrings": ["/Applications/Xcode_(?<currentValue>[^/]+?)\\.app"],
-      "datasourceTemplate": "custom.xcode",
-      "versioningTemplate": "loose"
-    }
-  ],
   "customDatasources": {
     "xcode": {
       "defaultRegistryUrlTemplate": "https://xcodereleases.com/data.json",
@@ -16,5 +7,21 @@
         "{ \"releases\": ( $dict := $reduce($, function($acc, $v) {( $key := $string($v.version.number) & ( $exists($v.version.release.beta) ? \"_beta_\" & $string($v.version.release.beta) : $exists($v.version.release.rc) ? \"_Release_Candidate_\" & $string($v.version.release.rc) : \"\" ); $date := $string($v.date.year) & \"-\" & $pad($string($v.date.month), -2, \"0\") & \"-\" & $pad($string($v.date.day), -2, \"0\") & \"T00:00Z\"; $merge([$acc, { $key: { \"version\": $key, \"isStable\": $v.version.release.release ?? false, \"releaseTimestamp\": $date, \"changelogUrl\": $v.links.notes.url } }]) )}, {}); $spread($dict).* ) } "
       ]
     }
-  }
+  },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["\\.github/.*\\.ya?ml"],
+      "matchStrings": ["/Applications/Xcode_(?<currentValue>[^/]+?)\\.app"],
+      "datasourceTemplate": "custom.xcode",
+      "versioningTemplate": "loose",
+      "depNameTemplate": "xcodereleases"
+    }
+  ],
+  "packageRules": [
+    {
+      "matchDepNames": ["xcodereleases"],
+      "changelogUrl": "{{{changelogUrl}}}"
+    }
+  ]
 }
