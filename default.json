@@ -1,10 +1,9 @@
 {
   "customDatasources": {
     "xcode": {
-      "defaultRegistryUrlTemplate": "https://xcodereleases.com/data.json",
       "format": "json",
       "transformTemplates": [
-        "{ \"releases\": ( $dict := $reduce($, function($acc, $v) {( $key := $string($v.version.number) & ( $exists($v.version.release.beta) ? \"_beta_\" & $string($v.version.release.beta) : $exists($v.version.release.rc) ? \"_Release_Candidate_\" & $string($v.version.release.rc) : \"\" ); $date := $string($v.date.year) & \"-\" & $pad($string($v.date.month), -2, \"0\") & \"-\" & $pad($string($v.date.day), -2, \"0\") & \"T00:00Z\"; $merge([$acc, { $key: { \"version\": $key, \"isStable\": $v.version.release.release ?? false, \"releaseTimestamp\": $date, \"changelogUrl\": $v.links.notes.url } }]) )}, {}); $spread($dict).* ) } "
+        "{ \"releases\": ( $dict := $reduce($, function($acc, $v) {( $key := $string($v.version) & ( $exists($v.info.release.beta) ? \"_beta_\" & $string($v.info.release.beta) : $exists($v.info.release.rc) ? \"_Release_Candidate_\" & $string($v.info.release.rc) : \"\" ); $date := $string($v.info.date.year) & \"-\" & $pad($string($v.info.date.month), -2, \"0\") & \"-\" & $pad($string($v.info.date.day), -2, \"0\") & \"T00:00Z\"; $merge([$acc, { $key: { \"version\": $key, \"isStable\": $v.info.release.release ?? false, \"releaseTimestamp\": $date, \"changelogUrl\": $v.info.release_note_url, \"sourceUrl\": $v.info.release_note_url } }]) )}, {}); $spread($dict).* ) } "
       ]
     }
   },
@@ -12,7 +11,10 @@
     {
       "customType": "regex",
       "fileMatch": ["\\.github/.*\\.ya?ml"],
-      "matchStrings": ["Xcode_(?<currentValue>[^/]+?)\\.app"],
+      "matchStrings": [
+        "#\\s*renovate-xcodereleases:\\s*runs-on=\\s*macos-(?<runsOnVersion>[^\\s]+)[^\\n]*\\n\\s.+Xcode_(?<currentValue>[^/]+?)\\.app"
+      ],
+      "registryUrlTemplate": "https://raw.githubusercontent.com/swiftty/InstalledXcodeVersions/refs/heads/main/releases/installed-xcode-versions-{{runsOnVersion}}.json",
       "datasourceTemplate": "custom.xcode",
       "versioningTemplate": "loose",
       "depNameTemplate": "apple/xcode"
