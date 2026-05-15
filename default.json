@@ -23,7 +23,7 @@
       "customType": "regex",
       "fileMatch": ["\\.github/.*\\.ya?ml"],
       "matchStrings": [
-        "#\\s*renovate-xcodereleases:\\s*runs-on=\\s*macos-(?<currentVersion>[^\\s]+)"
+        "#\\s*renovate-xcodereleases:\\s*runs-on=\\s*(?<packageName>[^-\\s]+)-(?<currentValue>[^\\s]+)\\s"
       ],
       "datasourceTemplate": "github-runners",
       "versioningTemplate": "loose"
