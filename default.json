@@ -12,8 +12,7 @@
       "customType": "regex",
       "fileMatch": ["\\.github/.*\\.ya?ml"],
       "matchStrings": [
-        "#\\s*renovate-xcodereleases:\\s*runs-on=\\s*macos-(?<runsOnVersion>[^\\s]+)[^\\n]*\\n\\s.+Xcode_(?<currentValue>[^/]+?)\\.app",
-        "#\\s*renovate-xcodereleases:\\s*runs-on=\\s*macos-(?<runsOnVersion>[^\\s]+)[^\\n]*\\n.*?(?<currentValue>[0-9.]+)"
+        "#\\s*renovate-xcodereleases:\\s*runs-on=\\s*macos-(?<runsOnVersion>[^\\s]+)[^\\n]*\\n.*?(?<currentValue>[0-9]+(?:\\.[0-9]+)*)"
       ],
       "registryUrlTemplate": "https://raw.githubusercontent.com/swiftty/InstalledXcodeVersions/refs/heads/main/releases/installed-xcode-versions-{{runsOnVersion}}.json",
       "datasourceTemplate": "custom.xcode",
