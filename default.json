@@ -12,9 +12,9 @@
       "customType": "regex",
       "fileMatch": ["\\.github/.*\\.ya?ml"],
       "matchStrings": [
-        "#\\s*renovate-xcodereleases:\\s*runs-on=\\s*macos-(?<runsOnVersion>[^\\s]+)(?:\\s+v=(?<datasourceVersion>[0-9]+(?:\\.[0-9]+)*))?[^\\n]*\\n.*?(?<currentValue>[0-9]+(?:\\.[0-9]+)*)"
+        "#\\s*renovate-xcodereleases:\\s*runs-on=\\s*(?<runsOnImage>[^\\s]+)(?:\\s+v=(?<datasourceVersion>[0-9]+(?:\\.[0-9]+)*))?[^\\n]*\\n.*?(?<currentValue>[0-9]+(?:\\.[0-9]+)*)"
       ],
-      "registryUrlTemplate": "{{#if datasourceVersion}}https://raw.githubusercontent.com/swiftty/InstalledXcodeVersions/refs/tags/{{{datasourceVersion}}}/releases/installed-xcode-versions-{{{runsOnVersion}}}.json{{else}}https://raw.githubusercontent.com/swiftty/InstalledXcodeVersions/refs/heads/main/releases/installed-xcode-versions-{{{runsOnVersion}}}.json{{/if}}",
+      "registryUrlTemplate": "{{#if datasourceVersion}}https://raw.githubusercontent.com/swiftty/InstalledXcodeVersions/refs/tags/{{{datasourceVersion}}}/releases/installed-xcode-versions-{{{runsOnImage}}}.json{{else}}https://raw.githubusercontent.com/swiftty/InstalledXcodeVersions/refs/heads/main/releases/installed-xcode-versions-{{{runsOnImage}}}.json{{/if}}",
       "datasourceTemplate": "custom.xcode",
       "versioningTemplate": "loose",
       "depNameTemplate": "apple/xcode"
